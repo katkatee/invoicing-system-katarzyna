@@ -42,8 +42,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'pl.futurecollars.invoicing.App'
-}
+    mainClass.set('pl.futurecollars.invoicing.App')}
 
 checkstyle {
     showViolations = true
@@ -54,7 +53,8 @@ checkstyle {
 
 test {
     finalizedBy jacocoTestReport // report is always generated after tests run
-    finalizedBy jacocoTestCoverageVerification // report is always generated after tests run
+    finalizedBy jacocoTestCoverageVerification
+    // report is always generated after tests run
 }
 
 jacocoTestReport {
