@@ -1,10 +1,5 @@
 package pl.futurecollars.invoicing;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +12,8 @@ import pl.futurecollars.invoicing.model.Vat;
 import pl.futurecollars.invoicing.service.InvoiceService;
 
 public class App {
-  public static void main(String[] args)  {
+
+  public static void main(String[] args) {
 
     Database db = new InMemoryDatabase();
 

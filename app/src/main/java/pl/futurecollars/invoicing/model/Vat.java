@@ -7,6 +7,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public enum Vat {
+
   VAT_ZW(0),
   VAT_0(0),
   VAT_5(5),

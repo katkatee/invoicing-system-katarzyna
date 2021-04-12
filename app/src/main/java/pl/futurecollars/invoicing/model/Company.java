@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Company {
+
   private String name;
   private String taxIdentificationNumber;
   private String address;
