@@ -40,5 +40,4 @@ public class App {
     invoiceService.delete(id);
 
   }
-
 }

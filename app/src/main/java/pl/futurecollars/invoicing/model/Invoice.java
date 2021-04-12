@@ -19,5 +19,6 @@ public class Invoice {
     this.buyer = buyer;
     this.seller = seller;
     this.entries = entries;
+
   }
 }

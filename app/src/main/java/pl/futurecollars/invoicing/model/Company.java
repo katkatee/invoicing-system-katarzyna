@@ -14,5 +14,6 @@ public class Company {
     this.name = name;
     this.taxIdentificationNumber = taxIdentificationNumber;
     this.address = address;
+
   }
 }
