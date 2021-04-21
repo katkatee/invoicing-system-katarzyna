@@ -1,11 +1,15 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    // Apply the groovy plugin to also add support for Groovy (needed for Spock)
+
+    id 'application'   
     id 'groovy'
 
     id 'checkstyle'
     id 'jacoco'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass.set('pl.futurecollars.invoicing.App')
 }
 
 group = 'pl.futurecollars.invoicing'
@@ -17,8 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    // Use the latest Groovy version for Spock testing
+
     testImplementation 'org.codehaus.groovy:groovy-all:2.5.13'
 
     // Use the awesome Spock testing and specification framework even with Java
