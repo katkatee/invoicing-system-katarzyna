@@ -25,7 +25,7 @@ public class App {
     JsonService jsonService = new JsonService();
     Database db = new FileBasedDatabase(Path.of(Config.DATABASE_LOCATION), idService, filesService, jsonService);
 
-    InvoiceService service = new InvoiceService(db);
+    InvoiceService invoiceService = new InvoiceService(db);
 
     Company buyer = new Company("5213861303", "ul. Bukowińska 24d/7 02-703 Warszawa, Polska", "iCode Trust Sp. z o.o");
     Company seller = new Company("552-168-66-00", "32-005 Niepolomice, Nagietkowa 19", "Piotr Kolacz Development");
@@ -35,13 +35,13 @@ public class App {
 
     Invoice invoice = new Invoice(LocalDate.now(), buyer, seller, products);
 
-    int id = service.save(invoice);
+    int id = invoiceService.save(invoice);
 
-    service.getById(id).ifPresent(System.out::println);
+    invoiceService.getById(id).ifPresent(System.out::println);
 
-    System.out.println(service.getAll());
+    System.out.println(invoiceService.getAll());
 
-    service.delete(id);
+    invoiceService.delete(id);
 
   }
 }
