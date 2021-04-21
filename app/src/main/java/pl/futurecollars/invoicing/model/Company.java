@@ -1,8 +1,8 @@
 package pl.futurecollars.invoicing.model;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
