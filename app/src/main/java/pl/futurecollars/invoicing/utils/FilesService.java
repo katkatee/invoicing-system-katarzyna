@@ -15,7 +15,6 @@ public class FilesService {
 
   public void writeToFile(Path path, String line) throws IOException {
     Files.writeString(path, line, StandardOpenOption.TRUNCATE_EXISTING);
-
   }
 
   public void writeLinesToFile(Path path, List<String> lines) throws IOException {

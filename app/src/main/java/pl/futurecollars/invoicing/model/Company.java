@@ -12,5 +12,5 @@ public class Company {
   private String taxIdentificationNumber;
   private String address;
   private String name;
-  
+
 }
