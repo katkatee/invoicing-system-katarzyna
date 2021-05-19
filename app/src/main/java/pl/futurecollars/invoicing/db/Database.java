@@ -1,3 +1,4 @@
+
 package pl.futurecollars.invoicing.db;
 
 import java.util.List;
@@ -12,8 +13,8 @@ public interface Database {
 
   List<Invoice> getAll();
 
-  void update(int id, Invoice updatedInvoice);
+  Optional<Invoice> update(int id, Invoice updatedInvoice);
 
-  void delete(int id);
+  Optional<Invoice> delete(int id);
 
 }
