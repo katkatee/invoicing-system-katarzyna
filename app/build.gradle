@@ -65,6 +65,7 @@ java {
 
 test {
     finalizedBy jacocoTestReport
+    finalizedBy jacocoTestCoverageVerification
 }
 
 jacocoTestReport {
