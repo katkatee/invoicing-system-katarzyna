@@ -1,49 +1,75 @@
-plugins {
-    id 'org.springframework.boot' version '2.4.2'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
-    id 'application'
-    id 'groovy'
+buildscript {
+    ext {
+        lombokVersion = '1.18.18'
+        spockVersion = '1.3-groovy-2.5'
+        springBootVersion = '2.4.2'
+        springDependencyManagementVersion = '1.0.11.RELEASE'
+    }
+}
 
+plugins {
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+    id 'java'
+    id 'groovy'
     id 'checkstyle'
     id 'jacoco'
 }
 
-application {
-    // Define the main class for the application.
-    mainClass.set('pl.futurecollars.invoicing.App')
-}
-
-group = 'pl.futurecollars.invoicing'
-version = '0.0.1-SNAPSHOT'
-
 repositories {
-    // Use JCenter for resolving dependencies.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.codehaus.groovy:groovy-all:2.5.13'
+    testImplementation "org.spockframework:spock-core:${spockVersion}"
+    testImplementation "org.spockframework:spock-spring:${spockVersion}"
+}
 
-    // Use the awesome Spock testing and specification framework even with Java
-    testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
-    testImplementation 'junit:junit:4.13'
-    testImplementation 'org.spockframework:spock-spring:1.3-groovy-2.5'
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.85
+            }
+        }
+        rule {
+            limit {
+                counter = 'LINE'
+                minimum = 0.85
+            }
+        }
+    }
 
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:29.0-jre'
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['pl/futurecollars/invoicing/InvoiceApplication.class',
+                                        'pl/futurecollars/invoicing/db/DatabaseConfiguration.class',
+                                        'pl/futurecollars/invoicing/App.class'])
+        }))
+    }
+}
 
-    compileOnly 'org.projectlombok:lombok:1.18.16'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(15)
+        vendor = JvmVendorSpec.ADOPTOPENJDK
+    }
+}
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.16'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+test {
+    finalizedBy jacocoTestReport
+    finalizedBy jacocoTestCoverageVerification
+}
 
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.1'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.1'
+jacocoTestReport {
+    dependsOn test
 }
 
 checkstyle {
@@ -51,45 +77,4 @@ checkstyle {
     ignoreFailures = false
     maxWarnings = 0
     maxErrors = 0
-}
-
-test {
-    finalizedBy jacocoTestReport // report is always generated after tests run
-    finalizedBy jacocoTestCoverageVerification
-}
-jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-}
-
-jacoco {
-    toolVersion = "0.8.6"
-}
-
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            limit {
-                minimum = 0.85
-            }
-        }
-    }
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude:
-                    ['pl/futurecollars/invoicing/App.class',
-                     'pl/futurecollars/invoicing/controller/**'
-                    ])
-        }))
-    }
-}
-
-jacocoTestReport {
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude:
-                    ['pl/futurecollars/invoicing/App.class',
-                     'pl/futurecollars/invoicing/InvoiceApplication.class'
-                    ])
-        }))
-    }
 }
