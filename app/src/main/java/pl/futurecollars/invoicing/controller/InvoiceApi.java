@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.futurecollars.invoicing.model.Invoice;
 
-@RequestMapping("invoices")
+@RequestMapping(value = "invoices", produces = {"application/json;charset=UTF-8"})
 @Api(value = "Invoice Controller", tags = "invoices")
 public interface InvoiceApi {
 
-  @GetMapping(produces = {"application/json;charset=UTF-8"})
+  @GetMapping()
   @ApiOperation(value = "Get all invoices", notes = "Get all invoices fron the database.")
   List<Invoice> getAll();
 
@@ -25,7 +25,7 @@ public interface InvoiceApi {
   @ApiOperation(value = "Add an invoice")
   int add(@RequestBody Invoice invoice);
 
-  @GetMapping(value = "/{id}", produces = {"application/json;charset=UTF-8"})
+  @GetMapping(value = "/{id}")
   @ApiOperation(value = "Get invoice bby id")
   ResponseEntity<Invoice> getById(@PathVariable int id);
 
