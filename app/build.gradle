@@ -6,6 +6,7 @@ buildscript {
         springDependencyManagementVersion = '1.0.11.RELEASE'
         springFoxStarterVersion = '3.0.0'
         springFoxUiVersion = '3.0.0'
+        flywayVersion = '7.6.0'
     }
 }
 
@@ -24,13 +25,24 @@ repositories {
 
 dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    compile "org.flywaydb:flyway-core:${flywayVersion}"
+
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation "io.springfox:springfox-boot-starter:${springFoxStarterVersion}"
     implementation "io.springfox:springfox-swagger-ui:${springFoxUiVersion}"
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    runtimeOnly 'com.h2database:h2:1.4.200'
+    runtimeOnly 'org.postgresql:postgresql:42.2.19'
+
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.spockframework:spock-core:${spockVersion}"
     testImplementation "org.spockframework:spock-spring:${spockVersion}"
 }
@@ -82,3 +94,19 @@ checkstyle {
     maxWarnings = 0
     maxErrors = 0
 }
+
+task testWithFileDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'file'
+}
+
+task testWithMemoryDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'memory'
+}
+
+task testWithSqlDatabase(type: Test) {
+    systemProperty 'spring.profiles.active', 'sql'
+}
+
+check.dependsOn testWithFileDatabase
+check.dependsOn testWithMemoryDatabase
+//check.dependsOn testWithSqlDatabase
