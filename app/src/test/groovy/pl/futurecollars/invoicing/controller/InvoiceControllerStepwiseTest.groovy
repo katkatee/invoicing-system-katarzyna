@@ -27,7 +27,7 @@ class InvoiceControllerStepwiseTest extends Specification {
     private MockMvc mockMvc
 
     @Autowired
-    private JsonService jsonService;
+    private JsonService jsonService
 
     private Invoice originalInvoice = TestHelpers.invoice(1)
 
