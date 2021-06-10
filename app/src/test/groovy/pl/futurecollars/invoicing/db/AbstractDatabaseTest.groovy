@@ -1,6 +1,5 @@
 package pl.futurecollars.invoicing.db
 
-
 import pl.futurecollars.invoicing.model.Invoice
 import spock.lang.Specification
 
@@ -12,6 +11,7 @@ abstract class AbstractDatabaseTest extends Specification {
     Database database = getDatabaseInstance()
 
     abstract Database getDatabaseInstance()
+
 
     def "should save invoices returning sequential id, invoice should have id set to correct value, get by id returns saved invoice"() {
         when:
