@@ -13,7 +13,7 @@ logging:
 
 spring:
   profiles:
-    active: mongo
+    active: file
   flyway:
     enabled: false
 

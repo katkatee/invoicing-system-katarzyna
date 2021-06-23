@@ -18,15 +18,15 @@ class IdProviderTest extends Specification {
         Files.readAllLines(nextIdDbPath) == ['1']
 
         and:
-        idService.getNextIdAndIncreament() == 1
+        idService.getNextIdAndIncrement() == 1
         Files.readAllLines(nextIdDbPath) == ['2']
 
         and:
-        idService.getNextIdAndIncreament() == 2
+        idService.getNextIdAndIncrement() == 2
         Files.readAllLines(nextIdDbPath) == ['3']
 
         and:
-        idService.getNextIdAndIncreament() == 3
+        idService.getNextIdAndIncrement() == 3
         Files.readAllLines(nextIdDbPath) == ['4']
     }
 
@@ -39,15 +39,15 @@ class IdProviderTest extends Specification {
         Files.readAllLines(nextIdDbPath) == ['17']
 
         and:
-        idService.getNextIdAndIncreament() == 17
+        idService.getNextIdAndIncrement() == 17
         Files.readAllLines(nextIdDbPath) == ['18']
 
         and:
-        idService.getNextIdAndIncreament() == 18
+        idService.getNextIdAndIncrement() == 18
         Files.readAllLines(nextIdDbPath) == ['19']
 
         and:
-        idService.getNextIdAndIncreament() == 19
+        idService.getNextIdAndIncrement() == 19
         Files.readAllLines(nextIdDbPath) == ['20']
     }
 }
