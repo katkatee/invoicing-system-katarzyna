@@ -93,6 +93,7 @@ jacocoTestReport {
     dependsOn check
 }
 
+
 checkstyle {
     showViolations = true
     ignoreFailures = false
@@ -130,3 +131,7 @@ check.dependsOn testWithSqlDatabase
 check.dependsOn testWithJpaDatabase
 check.dependsOn testWithJpaFlywayDatabase
 check.dependsOn testWithMongoDatabase
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:all" << "-Xlint:-processing" << "-Werror"
+}
