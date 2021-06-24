@@ -13,27 +13,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.futurecollars.invoicing.model.Company;
 
-@RequestMapping(value = "companies", produces = {"application/json;charset=UTF-8"})
-@Api(tags = {"company-controller"})
+@RequestMapping("companies")
+@Api(tags = "company-controller")
 public interface CompanyApi {
 
-  @ApiOperation(value = "Get list of all companies")
-  @GetMapping
+  @GetMapping(produces = {"application/json;charset=UTF-8"})
+  @ApiOperation(value = "Get all companies from the database")
   List<Company> getAll();
 
-  @ApiOperation(value = "Add new company to system")
   @PostMapping
-  long add(@RequestBody Company company);
+  @ApiOperation(value = "Add a company to the database")
+  long add(@RequestBody Company invoice);
 
-  @ApiOperation(value = "Get company by id")
-  @GetMapping(value = "/{id}")
+  @GetMapping(value = "/{id}", produces = {"application/json;charset=UTF-8"})
+  @ApiOperation(value = "Get a company from the database by id")
   ResponseEntity<Company> getById(@PathVariable int id);
 
-  @ApiOperation(value = "Delete company with given id")
   @DeleteMapping("/{id}")
+  @ApiOperation(value = "Delete a company from the database by id")
   ResponseEntity<?> deleteById(@PathVariable int id);
 
-  @ApiOperation(value = "Update company with given id")
   @PutMapping("/{id}")
+  @ApiOperation(value = "Update a company in the database by id")
   ResponseEntity<?> update(@PathVariable int id, @RequestBody Company company);
+
 }

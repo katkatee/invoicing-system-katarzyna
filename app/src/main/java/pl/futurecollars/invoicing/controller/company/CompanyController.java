@@ -1,17 +1,15 @@
 package pl.futurecollars.invoicing.controller.company;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.futurecollars.invoicing.model.Company;
 import pl.futurecollars.invoicing.service.company.CompanyService;
 
 @RestController
-@AllArgsConstructor
-public class CompanyController implements pl.futurecollars.invoicing.controller.company.CompanyApi {
+@RequiredArgsConstructor
+public class CompanyController implements CompanyApi {
 
   private final CompanyService companyService;
 
@@ -21,29 +19,28 @@ public class CompanyController implements pl.futurecollars.invoicing.controller.
   }
 
   @Override
-  public long add(@RequestBody Company company) {
+  public long add(Company company) {
     return companyService.save(company);
   }
 
   @Override
-  public ResponseEntity<Company> getById(@PathVariable int id) {
+  public ResponseEntity<Company> getById(int id) {
     return companyService.getById(id)
-        .map(company -> ResponseEntity.ok().body(company))
+        .map(item -> ResponseEntity.ok().body(item))
         .orElse(ResponseEntity.notFound().build());
   }
 
   @Override
-  public ResponseEntity<?> deleteById(@PathVariable int id) {
+  public ResponseEntity<?> deleteById(int id) {
     return companyService.delete(id)
-        .map(name -> ResponseEntity.noContent().build())
+        .map(item -> ResponseEntity.noContent().build())
         .orElse(ResponseEntity.notFound().build());
   }
 
   @Override
-  public ResponseEntity<?> update(@PathVariable int id, @RequestBody Company company) {
+  public ResponseEntity<?> update(int id, Company company) {
     return companyService.update(id, company)
-        .map(name -> ResponseEntity.noContent().build())
+        .map(item -> ResponseEntity.noContent().build())
         .orElse(ResponseEntity.notFound().build());
   }
-
 }

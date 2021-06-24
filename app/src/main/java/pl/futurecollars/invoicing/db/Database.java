@@ -18,6 +18,6 @@ public interface Database<T extends WithId> {
   Optional<T> delete(long id);
 
   default void reset() {
-    getAll().forEach(invoice -> delete(invoice.getId()));
+    getAll().forEach(item -> delete(item.getId()));
   }
 }
