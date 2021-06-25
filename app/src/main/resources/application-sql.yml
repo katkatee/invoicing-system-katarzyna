@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:8888/invoicing-test
+    url: jdbc:postgresql://localhost:8888/invoicing
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
