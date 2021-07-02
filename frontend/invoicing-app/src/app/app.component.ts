@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { Company } from './company'
 import { CompanyService } from './company.service';
 
@@ -7,11 +7,11 @@ import { CompanyService } from './company.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
   title = 'Invoicing App';
 
-  companies : Company[] = [];
   newCompany : Company = new Company(0, "", "", "", 0, 0);
+  companies : Company[] = [];
 
   constructor(
     private companiesService: CompanyService
