@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.futurecollars.invoicing.controller.InvoiceApi;
 import pl.futurecollars.invoicing.model.Invoice;
 import pl.futurecollars.invoicing.service.invoice.InvoiceService;
 
@@ -29,22 +28,22 @@ public class InvoiceController implements InvoiceApi {
   @Override
   public ResponseEntity<Invoice> getById(@PathVariable int id) {
     return invoiceService.getById(id)
-          .map(invoice -> ResponseEntity.ok().body(invoice))
-          .orElse(ResponseEntity.notFound().build());
+        .map(invoice -> ResponseEntity.ok().body(invoice))
+        .orElse(ResponseEntity.notFound().build());
   }
 
   @Override
   public ResponseEntity<?> deleteById(@PathVariable int id) {
     return invoiceService.delete(id)
-          .map(name -> ResponseEntity.noContent().build())
-          .orElse(ResponseEntity.notFound().build());
+        .map(name -> ResponseEntity.noContent().build())
+        .orElse(ResponseEntity.notFound().build());
   }
 
   @Override
   public ResponseEntity<?> update(@PathVariable int id, @RequestBody Invoice invoice) {
     return invoiceService.update(id, invoice)
-          .map(name -> ResponseEntity.noContent().build())
-          .orElse(ResponseEntity.notFound().build());
+        .map(name -> ResponseEntity.noContent().build())
+        .orElse(ResponseEntity.notFound().build());
   }
 
 }
