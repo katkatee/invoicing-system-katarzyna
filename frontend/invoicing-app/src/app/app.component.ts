@@ -48,8 +48,8 @@ triggerUpdate(company: Company) {
         company.taxIdentificationNumber,
         company.address,
         company.name,
-        company.healthInsurance,
-        company.pensionInsurance
+        company.pensionInsurance,
+        company.healthInsurance
     )
 
     company.editMode = true
