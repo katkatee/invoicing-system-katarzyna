@@ -13,7 +13,16 @@ logging:
 
 spring:
   profiles:
-    active: memory
+    active: file
   flyway:
     enabled: false
+  security:
+    user:
+      name: katkatee
+      password: lala123
+
+invoicing-system:
+  allowedOrigins: http://localhost:4200
+  csrf:
+    disable: true
 
