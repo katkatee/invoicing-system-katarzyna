@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Company } from './company';
 
-const ENDPOINT_URL = 'companies';
+const PATH = 'companies';
 
 @Injectable({
     providedIn: 'root'
@@ -19,19 +19,19 @@ export class CompanyService {
     }
 
     getCompanies(): Observable<Company[]> {
-        return this.http.get<Company[]>(this.apiUrl(ENDPOINT_URL));
+        return this.http.get<Company[]>(this.apiUrl(PATH));
     }
 
     addCompany(company: Company): Observable<any> {
-        return this.http.post<any>(this.apiUrl(ENDPOINT_URL), this.toCompanyRequest(company), this.contentType);
+        return this.http.post<any>(this.apiUrl(PATH), this.toCompanyRequest(company), this.contentType);
     }
 
     deleteCompany(id: number): Observable<any> {
-        return this.http.delete<any>(this.apiUrl(ENDPOINT_URL, id));
+        return this.http.delete<any>(this.apiUrl(PATH, id));
     }
 
     editCompany(company: Company): Observable<any> {
-        return this.http.put<Company>(this.apiUrl(ENDPOINT_URL, company.id), this.toCompanyRequest(company), this.contentType);
+        return this.http.put<Company>(this.apiUrl(PATH, company.id), this.toCompanyRequest(company), this.contentType);
     }
 
     private apiUrl(service: string, id: number | null = null): string {
