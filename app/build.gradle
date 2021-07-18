@@ -32,7 +32,10 @@ dependencies {
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
 
+
     implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.security:spring-security-test"
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation "io.springfox:springfox-boot-starter:${springFoxStarterVersion}"
     implementation "io.springfox:springfox-swagger-ui:${springFoxUiVersion}"
@@ -71,7 +74,8 @@ jacocoTestCoverageVerification {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: ['pl/futurecollars/invoicing/InvoiceApplication.class',
                                         'pl/futurecollars/invoicing/db/DatabaseConfiguration.class',
-                                        'pl/futurecollars/invoicing/App.class'])
+                                        'pl/futurecollars/invoicing/App.class',
+                                        'pl/futurecollars/invoicing/config/*'])
         }))
     }
 }
